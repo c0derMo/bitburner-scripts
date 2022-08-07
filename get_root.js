@@ -1,11 +1,6 @@
-import { runUntilFinished, toastAndPrint } from "./utils";
-
 /** @param {NS} ns */
 export async function main(ns) {
     const SERVERS = [];
-    const TARGET = ns.args[0];
-
-    await runUntilFinished(ns, "get_root.js");
 
     // 0-port-server
     SERVERS.push("n00dles", "foodnstuff", "sigma-cosmetics", "joesguns", "nectar-net", "hong-fang-tea", "harakiri-sushi");
@@ -25,14 +20,20 @@ export async function main(ns) {
         SERVERS.push("catalyst", "rothman-uni", "summit-uni", "netlink", "I.I.I.I");
     }
 
-    // own-bought-servers
-    SERVERS.push(...ns.getPurchasedServers());
-
-    ns.print(SERVERS);
 
     for (const server of SERVERS) {
-        await runUntilFinished(ns, "deploy.js", 1, server, TARGET);
+        if (ns.fileExists("relaySMTP.exe")) {
+            ns.relaysmtp(server);
+        }
+        if (ns.fileExists("FTPCrack.exe")) {
+            ns.ftpcrack(server);
+        }
+        if (ns.fileExists("BruteSSH.exe")) {
+            ns.brutessh(server);
+        }
+        ns.nuke(server);
     }
 
-    toastAndPrint(ns, "Deployed script to " + SERVERS.length + " servers.");
+    ns.toast("Got root on " + SERVERS.length + " servers.", "success");
+
 }
