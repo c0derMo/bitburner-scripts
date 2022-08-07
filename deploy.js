@@ -7,8 +7,11 @@ export async function main(ns) {
 
     // Check if script is already running
     const processes = ns.ps(TARGET).filter((e) => {
+        const possibleThreads = Math.floor((ns.getServerMaxRam(TARGET) - ns.getServerUsedRam(TARGET) + (e.threads * ns.getScriptRam(SCRIPT_TO_RUN))) / ns.getScriptRam(SCRIPT_TO_RUN));
+
         return e.filename === SCRIPT_TO_RUN &&
-            e.args[0] !== ns.args[1]
+            (e.args[0] !== ns.args[1] ||
+            e.threads !== possibleThreads);
     });
     ns.print(processes);
     if (processes.length >= 1) {
