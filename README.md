@@ -18,6 +18,14 @@ Purchases servers continously, and runs `early-script.js` on them, stolen from t
 
 Lists all my purchased servers.
 
-# find_target.js
+# advanced_scan.js
 
-Figures out a good, profitable, hackable target for me.
+Advanced, recursive scan, used as cli tool & library
+
+# get_root.js
+
+Obtains root on all currently possible servers
+
+# utils.js
+
+Utility file with logging functions

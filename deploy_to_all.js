@@ -1,32 +1,20 @@
+import { recursiveScan } from "./advanced_scan";
 import { runUntilFinished, toastAndPrint } from "./utils";
 
 /** @param {NS} ns */
 export async function main(ns) {
-    const SERVERS = [];
     const TARGET = ns.args[0];
 
     await runUntilFinished(ns, "get_root.js");
 
-    // 0-port-server
-    SERVERS.push("n00dles", "foodnstuff", "sigma-cosmetics", "joesguns", "nectar-net", "hong-fang-tea", "harakiri-sushi");
+    let possiblePorts = 0;
+    ["BruteSSH.exe", "FTPCrack.exe", "relaySMTP.exe", "HTTPWorm.exe", "SQLInject.exe"].forEach((e) => {
+        if (ns.fileExists(e)) {
+            possiblePorts++;
+        }
+    });
 
-    // 1-port-server
-    if (ns.fileExists("BruteSSH.exe")) {
-        SERVERS.push("neo-net", "zer0", "max-hardware", "iron-gym", "CSEC");
-    }
-
-    // 2-port-server
-    if (ns.fileExists("FTPCrack.exe")) {
-        SERVERS.push("silver-helix", "phantasy", "omega-net", "the-hub", "avmnite-02h");
-    }
-
-    // 3-port-server
-    if (ns.fileExists("relaySMTP.exe")) {
-        SERVERS.push("catalyst", "rothman-uni", "summit-uni", "netlink", "I.I.I.I");
-    }
-
-    // own-bought-servers
-    SERVERS.push(...ns.getPurchasedServers());
+    const SERVERS = recursiveScan(ns, "home", possiblePorts, false, true).filter((e) => { return e !== "home" });
 
     ns.print(SERVERS);
 

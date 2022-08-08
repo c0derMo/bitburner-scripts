@@ -1,27 +1,24 @@
+import { recursiveScan } from "./advanced_scan";
+
 /** @param {NS} ns */
 export async function main(ns) {
-    const SERVERS = [];
 
-    // 0-port-server
-    SERVERS.push("n00dles", "foodnstuff", "sigma-cosmetics", "joesguns", "nectar-net", "hong-fang-tea", "harakiri-sushi");
+    let possiblePorts = 0;
+    ["BruteSSH.exe", "FTPCrack.exe", "relaySMTP.exe", "HTTPWorm.exe", "SQLInject.exe"].forEach((e) => {
+        if (ns.fileExists(e)) {
+            possiblePorts++;
+        }
+    });
 
-    // 1-port-server
-    if (ns.fileExists("BruteSSH.exe")) {
-        SERVERS.push("neo-net", "zer0", "max-hardware", "iron-gym", "CSEC");
-    }
-
-    // 2-port-server
-    if (ns.fileExists("FTPCrack.exe")) {
-        SERVERS.push("silver-helix", "phantasy", "omega-net", "the-hub", "avmnite-02h");
-    }
-
-    // 3-port-server
-    if (ns.fileExists("relaySMTP.exe")) {
-        SERVERS.push("catalyst", "rothman-uni", "summit-uni", "netlink", "I.I.I.I");
-    }
-
+    const SERVERS = recursiveScan(ns, "home", possiblePorts, true, true);
 
     for (const server of SERVERS) {
+        if (ns.fileExists("SQLInject.exe")) {
+            ns.sqlinject(server);
+        }
+        if (ns.fileExists("HTTPWorm.exe")) {
+            ns.httpworm(server);
+        }
         if (ns.fileExists("relaySMTP.exe")) {
             ns.relaysmtp(server);
         }
