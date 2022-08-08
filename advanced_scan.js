@@ -11,7 +11,7 @@
 export function recursiveScan(ns, startServer, maximumPortRequirement = -1, includeServersWithoutRam = true, includePlayerOwnedServers = true) {
     const servers = _recursiveScan(ns, startServer);
     return servers.filter((e) => {
-        return ((maximumPortRequirement < 0 || ns.getServerNumPortsRequired(e) < maximumPortRequirement) &&
+        return ((maximumPortRequirement < 0 || ns.getServerNumPortsRequired(e) <= maximumPortRequirement) &&
             (includeServersWithoutRam || ns.getServerMaxRam(e) > 0)) ||
             (includePlayerOwnedServers && ns.getServer(e).purchasedByPlayer);
     });
