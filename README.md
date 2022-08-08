@@ -29,3 +29,7 @@ Obtains root on all currently possible servers
 # utils.js
 
 Utility file with logging functions
+
+# find_connection_path.js
+
+Finds an connection path between arbitraty servers
