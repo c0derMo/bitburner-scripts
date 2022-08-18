@@ -1,4 +1,4 @@
-function isArraySortedDescending(a) {
+function isArraySortedDescending(a: number[]): boolean {
     let i = 1;
     while (i < a.length) {
         if (a[i - 1] < a[i]) {
@@ -10,8 +10,8 @@ function isArraySortedDescending(a) {
 }
 
 /** @param {NS} ns */
-export async function main(ns) {
-    const INPUT_ARRAY = ns.args[0].split(",").map(e => {
+export async function main(ns: NS): Promise<void> {
+    const INPUT_ARRAY = (ns.args[0] as string).split(",").map(e => {
         return parseInt(e)
     });
 
@@ -19,7 +19,7 @@ export async function main(ns) {
         ns.alert("No profit can be made. (0)");
     }
 
-    let nextHighs = [];
+    const nextHighs = [];
     let isDecending = true;
     let i = 1;
     while (i < INPUT_ARRAY.length) {

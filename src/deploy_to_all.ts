@@ -1,9 +1,9 @@
-import { recursiveScan } from "./advanced_scan";
-import { runUntilFinished, toastAndPrint } from "./utils";
+import { recursiveScan } from "advanced_scan";
+import { runUntilFinished, toastAndPrint } from "utils";
 
 /** @param {NS} ns */
-export async function main(ns) {
-    const TARGET = ns.args[0];
+export async function main(ns: NS): Promise<void> {
+    const TARGET = ns.args[0] as string;
 
     await runUntilFinished(ns, "get_root.js");
 

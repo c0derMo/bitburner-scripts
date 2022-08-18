@@ -1,3 +1,8 @@
+# Scripts
+
+- `npm run watch`: Autocompile on save
+- `npm run defs`: Update typedefs
+
 # early-script.js
 
 Unoptimized early hacking script, stolen from the tutorial.

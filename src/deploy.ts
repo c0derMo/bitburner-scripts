@@ -1,7 +1,7 @@
 /** @param {NS} ns */
-export async function main(ns) {
+export async function main(ns: NS): Promise<void> {
     const SCRIPT_TO_RUN = "early-script.js";
-    const TARGET = ns.args[0];
+    const TARGET = ns.args[0] as string;
 
     await ns.scp(SCRIPT_TO_RUN, TARGET);
 
@@ -17,7 +17,7 @@ export async function main(ns) {
     if (processes.length >= 1) {
         ns.print("Killing previous process");
         processes.forEach((p) => {
-            ns.kill(p.pid, TARGET);
+            ns.kill(p.filename, TARGET, ...p.args);
         })
     }
 

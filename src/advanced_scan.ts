@@ -8,7 +8,7 @@
  * @param {boolean} [includeServersWithoutRam=true] Include servers that don't have RAM.
  * @param {boolean} [includePlayerOwnedServers=true] Always include player owned servers, ignoring restrictions
  */
-export function recursiveScan(ns, startServer, maximumPortRequirement = -1, includeServersWithoutRam = true, includePlayerOwnedServers = true) {
+export function recursiveScan(ns: NS, startServer: string, maximumPortRequirement = -1, includeServersWithoutRam = true, includePlayerOwnedServers = true): string[] {
     const servers = _recursiveScan(ns, startServer);
     return servers.filter((e) => {
         return ((maximumPortRequirement < 0 || ns.getServerNumPortsRequired(e) <= maximumPortRequirement) &&
@@ -17,7 +17,7 @@ export function recursiveScan(ns, startServer, maximumPortRequirement = -1, incl
     });
 }
 
-function _recursiveScan(ns, server, previousServer="") {
+function _recursiveScan(ns: NS, server: string, previousServer=""): string[] {
     const result = [server];
     const servers = ns.scan(server).filter((e) => { return e !== previousServer });
     for (const newServer of servers) {
@@ -26,7 +26,7 @@ function _recursiveScan(ns, server, previousServer="") {
     return result;
 }
 
-function printScannedServers(ns, currentServer, prefix="", previousServer="") {
+function printScannedServers(ns: NS, currentServer: string, prefix="", previousServer=""): void {
     const servers = ns.scan(currentServer).filter((e) => { return e !== previousServer });
     for(const server of servers) {
         ns.tprint(`${prefix}--${server}`);
@@ -34,7 +34,6 @@ function printScannedServers(ns, currentServer, prefix="", previousServer="") {
     }
 }
 
-/** @param {NS} ns */
-export async function main(ns) {
+export async function main(ns : NS) : Promise<void> {
     printScannedServers(ns, "home");
 }

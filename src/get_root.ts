@@ -1,7 +1,7 @@
-import { recursiveScan } from "./advanced_scan";
+import { recursiveScan } from "advanced_scan";
 
 /** @param {NS} ns */
-export async function main(ns) {
+export async function main(ns: NS): Promise<void> {
 
     let possiblePorts = 0;
     ["BruteSSH.exe", "FTPCrack.exe", "relaySMTP.exe", "HTTPWorm.exe", "SQLInject.exe"].forEach((e) => {

@@ -1,9 +1,9 @@
 /** @param {NS} ns */
-export async function main(ns) {
-    const TARGET = ns.args[0];
+export async function main(ns: NS): Promise<void> {
+    const TARGET = ns.args[0] as string;
 
-    let moneyThresh = ns.getServerMaxMoney(TARGET) * 0.75;
-    let securityThresh = ns.getServerMinSecurityLevel(TARGET);
+    const moneyThresh = ns.getServerMaxMoney(TARGET);
+    const securityThresh = ns.getServerMinSecurityLevel(TARGET);
 
     while (true) {
         if (ns.getServerSecurityLevel(TARGET) > securityThresh) {

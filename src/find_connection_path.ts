@@ -1,4 +1,4 @@
-function find_path(ns, target, previousPath = []) {
+function find_path(ns: NS, target: string, previousPath = [] as string[]): string[] | null {
     previousPath.push(target);
     const servers = ns.scan(target).filter((e) => { return !previousPath.includes(e) });
     for (const server of servers) {
@@ -15,10 +15,14 @@ function find_path(ns, target, previousPath = []) {
 }
 
 /** @param {NS} ns */
-export async function main(ns) {
-    const TARGET = ns.args[0];
+export async function main(ns: NS): Promise<void> {
+    const TARGET = ns.args[0] as string;
 
-    const path = find_path(ns, TARGET).reverse();
+    const path = find_path(ns, TARGET);
 
-    ns.tprint(path.join(" -> "));
+    if (path != null) {
+        ns.tprint(path.reverse().join(" -> "));
+    } else {
+        ns.tprint("No path.");
+    }
 }
