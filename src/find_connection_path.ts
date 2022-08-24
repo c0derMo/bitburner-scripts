@@ -6,6 +6,10 @@ function find_path(ns: NS, target: string, previousPath = [] as string[]): strin
             previousPath.push("home");
             return previousPath;
         }
+        else if (ns.getServer(server).backdoorInstalled) {
+            previousPath.push(server);
+            return previousPath;
+        }
         const path = find_path(ns, server, previousPath);
         if (path != null) {
             return path;
@@ -22,6 +26,10 @@ export async function main(ns: NS): Promise<void> {
 
     if (path != null) {
         ns.tprint(path.reverse().join(" -> "));
+        if (path[0] === "home") {
+            path.pop();
+        }
+        ns.tprint(path.map((e) => { return "connect " + e}).join(" ; "));
     } else {
         ns.tprint("No path.");
     }
