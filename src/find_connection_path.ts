@@ -27,7 +27,7 @@ export async function main(ns: NS): Promise<void> {
     if (path != null) {
         ns.tprint(path.reverse().join(" -> "));
         if (path[0] === "home") {
-            path.pop();
+            path.splice(0,1);
         }
         ns.tprint(path.map((e) => { return "connect " + e}).join(" ; "));
     } else {
