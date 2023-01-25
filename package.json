@@ -1,29 +1,26 @@
 {
-  "name": "bitburner-typescript-template",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "bitburner-scripts",
+  "version": "2.0.0",
   "scripts": {
-    "watch": "npx tsc -w",
-    "lint": "eslint . --ext .ts",
-    "defs": "node ./updateDefs.js"
+    "watch:transpile": "tsc -w --preserveWatchOutput",
+    "watch:local": "node build/watch.js",
+    "watch:remote": "bitburner-filesync",
+    "watch:init": "node build/init.js",
+    "watch:all": "concurrently npm:watch:transpile npm:watch:local npm:watch:remote",
+    "watch": "npm run watch:init && npm run watch:all",
+    "lint": "eslint . --ext .ts"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bitburner-official/vscode-template.git"
-  },
-  "author": "SlyCedix",
-  "bugs": {
-    "url": "https://github.com/bitburner-official/vscode-template/issues"
-  },
-  "homepage": "https://github.com/bitburner-official/vscode-template#readme",
+  "author": "c0derMo",
   "devDependencies": {
-    "@types/lodash": "^4.14.178",
     "@types/node": "^16.4.3",
-    "@typescript-eslint/eslint-plugin": "^5.49.0",
-    "@typescript-eslint/parser": "^5.49.0",
-    "eslint": "^8.32.0",
-    "ts-node": "^9.1.1",
-    "typescript": "^4.3.5"
+    "@typescript-eslint/eslint-plugin": "^5.35.1",
+    "@typescript-eslint/parser": "^5.35.1",
+    "bitburner-filesync": "^1.1.5",
+    "chokidar": "^3.5.3",
+    "concurrently": "^7.4.0",
+    "eslint": "^8.22.0",
+    "fast-glob": "^3.2.12",
+    "sync-directory": "^5.1.7",
+    "typescript": "^4.7.4"
   }
 }
