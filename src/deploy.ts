@@ -1,3 +1,5 @@
+import { NS } from "@ns";
+
 /** @param {NS} ns */
 export async function main(ns: NS): Promise<void> {
     const SCRIPT_TO_RUN = "early-script.js";

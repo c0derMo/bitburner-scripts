@@ -1,5 +1,6 @@
 import { recursiveScan } from "advanced_scan";
 import { runUntilFinished, toastAndPrint } from "utils";
+import { NS } from "@ns";
 
 /** @param {NS} ns */
 export async function main(ns: NS): Promise<void> {

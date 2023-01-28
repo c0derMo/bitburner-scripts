@@ -1,3 +1,5 @@
+import { NS } from "@ns";
+
 function isArraySortedDescending(a: number[]): boolean {
     let i = 1;
     while (i < a.length) {

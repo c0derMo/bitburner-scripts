@@ -1,3 +1,5 @@
+import { NS } from "@ns";
+
 function find_path(ns: NS, target: string, previousPath = [] as string[]): string[] | null {
     previousPath.push(target);
     const servers = ns.scan(target).filter((e) => { return !previousPath.includes(e) });

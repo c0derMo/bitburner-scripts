@@ -1,3 +1,4 @@
+import { NS } from "@ns";
 import { recursiveScan } from "advanced_scan";
 
 /** @param {NS} ns */

@@ -1,3 +1,5 @@
+import { NS } from "@ns";
+
 /**
  * Resursively scans from the starting server, and returns all servers that match the arguments.
  *
