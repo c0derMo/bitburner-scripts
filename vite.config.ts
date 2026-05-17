@@ -16,5 +16,6 @@ export default defineConfig({
   viteburner: {
     watch: [{ pattern: "src/**/*.ts", transform: true }],
     sourcemap: "inline",
+    ignoreInitial: true,
   },
 });

@@ -44,9 +44,13 @@ function mainLoop(ns: NS) {
       } else {
         const sleeve = sleeveWork.unoccupiedSleeves.pop();
         if (sleeve == null) continue;
-        setToFactionWorkPrioritize(ns, sleeve, faction);
-        ns.print(`Sleeve ${sleeve} set to work for faction ${faction}.`);
-        sleeveWork = removeSleeve(sleeveWork, sleeveWork.factions[faction]);
+        const success = setToFactionWorkPrioritize(ns, sleeve, faction);
+        if (success) {
+          ns.print(`Sleeve ${sleeve} set to work for faction ${faction}.`);
+          sleeveWork = removeSleeve(sleeveWork, sleeveWork.factions[faction]);
+        } else {
+          sleeveWork.unoccupiedSleeves.push(sleeve);
+        }
       }
     }
   }
@@ -252,8 +256,11 @@ function setToFactionWorkPrioritize(
   ns: NS,
   sleeveNumber: number,
   faction: string,
-) {
+): boolean {
   const possibleWorkOptions = ns.singularity.getFactionWorkTypes(faction);
+  if (possibleWorkOptions.length <= 0) {
+    return false;
+  }
   const sleeveStats = ns.sleeve.getSleeve(sleeveNumber);
   const factionFavor = ns.singularity.getFactionFavor(faction);
   possibleWorkOptions.sort((workA, workB) => {
@@ -290,9 +297,10 @@ function setToFactionWorkPrioritize(
       return gainsB.reputation - gainsA.reputation;
     }
   });
-
+  
   const workType = possibleWorkOptions.shift() as FactionWorkType;
   ns.sleeve.setToFactionWork(sleeveNumber, faction, workType);
+  return true;
 }
 
 function setToTrain(ns: NS, unoccupiedSleeves: number[]) {
