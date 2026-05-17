@@ -1,8 +1,8 @@
-import { NS } from '@ns'
+import { NS } from "@ns";
 
-export async function main(ns : NS) : Promise<void> {
-    ns.tprint(ns.getPurchasedServers().length + " servers:");
-    ns.getPurchasedServers().forEach(s => {
-        ns.tprint(" " + s);
-    })
+export function main(ns: NS): Promise<void> {
+  ns.tprint(ns.cloud.getServerNames().length + " servers:");
+  ns.cloud.getServerNames().forEach((s) => {
+    ns.tprint(" " + s);
+  });
 }

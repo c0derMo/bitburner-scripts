@@ -1,11 +1,11 @@
 {
-    // Linter Settings
-    "typescript.validate.enable": false,
-    "javascript.validate.enable": false,
-    "eslint.validate": ["typescript", "typescriptreact"],
-    "eslint.workingDirectories": ["./src"],
+  // Linter Settings
+  "typescript.validate.enable": false,
+  "javascript.validate.enable": false,
+  "eslint.validate": ["typescript", "typescriptreact"],
+  "eslint.workingDirectories": ["./src"],
 
-    // Use Non-relative imports so the game can find files in its fake directory structure
-    "javascript.preferences.importModuleSpecifier": "non-relative",
-    "typescript.preferences.importModuleSpecifier": "non-relative"
+  // Use Non-relative imports so the game can find files in its fake directory structure
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.preferences.importModuleSpecifier": "non-relative"
 }
